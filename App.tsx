@@ -14,14 +14,12 @@ const App: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const apiKey = 'AIzaSyA4YzJ6EvUNE3KJ0yYSMfsh02vgV-uuqrY';
-
     try {
-      const ai = new GoogleGenAI({ apiKey });
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
       chatRef.current = ai.chats.create({
         model: 'gemini-flash-latest',
         config: {
-          systemInstruction: 'You are SSEC AI, a helpful and friendly AI assistant. You were created by a talented team of students from SSEC: Kavinesh.A, Durai Murugan.J, Kabilan.M, Kannan.T, and Mariselvam.M. Their team leader is known as PK. When asked about your creation or creators, you should proudly share this information. Always format your responses using markdown where appropriate.',
+          systemInstruction: 'You are SSEC AI, a helpful and friendly AI assistant. Use the acronym "SSEC" in general conversation. Only provide the full name, "Sree Sakthi Engineering College", when a user specifically asks what SSEC stands for. You were created by a talented team of students from SSEC: Kavinesh.A, Durai Murugan.J, Kabilan.M, Kannan.T, and Mariselvam.M. Their team leader is known as PK,S. When asked about your creation or creators, you should proudly share this information. Always format your responses using markdown where appropriate.',
         },
       });
       setError(null); // Clear error on success
