@@ -4,9 +4,10 @@ import { SendIcon } from './IconComponents';
 interface ChatInputProps {
   onSendMessage: (message: string) => void;
   isLoading: boolean;
+  disabled?: boolean;
 }
 
-export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }) => {
+export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading, disabled }) => {
   const [input, setInput] = useState('');
   const [isAnimating, setIsAnimating] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -22,7 +23,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }
   };
 
   const handleSubmit = () => {
-    if (input.trim() && !isLoading) {
+    if (input.trim() && !isLoading && !disabled) {
       onSendMessage(input);
       setInput('');
       if (textareaRef.current) {
@@ -49,7 +50,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           placeholder="Write a message..."
-          disabled={isLoading}
+          disabled={isLoading || disabled}
           rows={1}
           className="w-full bg-black/20 text-gray-200 placeholder-gray-500 border border-white/10 rounded-2xl py-3 pl-4 pr-6 resize-none focus:outline-none focus:ring-2 focus:ring-purple-500/50 transition-all duration-200 overflow-y-auto"
           style={{ maxHeight: '120px' }}
@@ -57,7 +58,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({ onSendMessage, isLoading }
       </div>
       <button
         onClick={handleSubmit}
-        disabled={isLoading || !input.trim()}
+        disabled={isLoading || !input.trim() || disabled}
         className={`flex-shrink-0 w-11 h-11 rounded-full bg-stone-200 text-gray-900 flex items-center justify-center hover:bg-stone-100 disabled:bg-gray-700 disabled:text-gray-500 disabled:cursor-not-allowed transition-colors duration-200 ${isAnimating ? 'animate-trigger' : ''}`}
         aria-label="Send message"
       >

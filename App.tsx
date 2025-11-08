@@ -14,17 +14,20 @@ const App: React.FC = () => {
   const chatContainerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
+    const apiKey = 'AIzaSyA4YzJ6EvUNE3KJ0yYSMfsh02vgV-uuqrY';
+
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+      const ai = new GoogleGenAI({ apiKey });
       chatRef.current = ai.chats.create({
         model: 'gemini-flash-latest',
         config: {
           systemInstruction: 'You are SSEC AI, a helpful and friendly AI assistant. You were created by a talented team of students from SSEC: Kavinesh.A, Durai Murugan.J, Kabilan.M, Kannan.T, and Mariselvam.M. Their team leader is known as PK. When asked about your creation or creators, you should proudly share this information. Always format your responses using markdown where appropriate.',
         },
       });
+      setError(null); // Clear error on success
     } catch (e) {
       console.error(e);
-      setError('Failed to initialize the AI model. Please check your API key.');
+      setError('Failed to initialize the AI model. The API key might be invalid.');
     }
   }, []);
 
@@ -129,7 +132,7 @@ const App: React.FC = () => {
       <footer className="p-4 md:p-6 border-t border-white/10 bg-black/20 backdrop-blur-lg sticky bottom-0">
         <div className="max-w-4xl mx-auto">
           {error && <p className="text-red-400 text-center text-sm mb-2">{error}</p>}
-          <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} />
+          <ChatInput onSendMessage={handleSendMessage} isLoading={isLoading} disabled={!!error} />
           <div className="text-center text-xs text-gray-600 mt-3">
             <p>Project by: Kavinesh.A | Durai Murugan.J | Kabilan.M | Kannan.T | Mariselvam.M</p>
           </div>
