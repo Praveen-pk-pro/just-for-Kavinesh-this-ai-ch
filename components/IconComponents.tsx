@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 export const UserIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -31,10 +32,8 @@ export const SendIcon = (props: React.SVGProps<SVGSVGElement>) => (
     strokeLinejoin="round"
     {...props}
   >
-    <path d="M5 12h14" />
-    <path d="M12 5l7 7-7 7" />
     <path d="m22 2-7 20-4-9-9-4Z" />
-    <path d="M22 2 11 13" />
+    <path d="m22 2-11 11" />
   </svg>
 );
 

@@ -1,3 +1,4 @@
+
 import React, { useState, useMemo } from 'react';
 import type { Message } from '../types';
 import { UserIcon, WarningIcon, CopyIcon, CheckIcon } from './IconComponents';
@@ -82,7 +83,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, isLoading }) 
           <UserIcon className="w-5 h-5 text-gray-300" />
         )}
       </div>
-      <div className={`group relative flex flex-col max-w-lg md:max-w-2xl items-start ${isModel ? 'items-start' : 'items-end'}`}>
+      <div className={`group relative flex flex-col max-w-[85%] sm:max-w-lg md:max-w-2xl items-start ${isModel ? 'items-start' : 'items-end'}`}>
         <div
           // Tailwind's `prose` classes are used here to style the rendered markdown
           className={`px-4 py-3 rounded-t-2xl rounded-b-2xl prose prose-invert prose-p:my-0 prose-headings:my-2 ${bubbleStyles} ${errorBubbleStyles}`}
@@ -100,7 +101,7 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({ message, isLoading }) 
         {isModel && !isLoading && !message.isError && message.content && (
            <button
             onClick={handleCopy}
-            className="absolute top-0 -right-10 p-1.5 bg-gray-800/80 rounded-full text-gray-400 hover:text-white hover:bg-gray-700/80 transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100"
+            className="absolute top-0 -right-9 sm:-right-10 p-1.5 bg-gray-800/80 rounded-full text-gray-400 hover:text-white hover:bg-gray-700/80 transition-all duration-200 opacity-0 group-hover:opacity-100 focus:opacity-100"
             aria-label={isCopied ? "Copied to clipboard" : "Copy message"}
             >
             {isCopied ? (

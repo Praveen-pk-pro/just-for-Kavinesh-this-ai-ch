@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 
 const quotes = [
@@ -28,7 +29,7 @@ export const WelcomeAnimation: React.FC = () => {
     <div className="flex-1 flex items-center justify-center">
       <div className="text-center">
         <h2 
-          className={`text-3xl md:text-4xl font-semibold text-gray-500 max-w-2xl font-lora ${isVisible ? 'quote-visible' : 'quote-hidden'}`}
+          className={`text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-500 max-w-2xl font-lora ${isVisible ? 'quote-visible' : 'quote-hidden'}`}
         >
           {quotes[currentQuoteIndex]}
         </h2>
